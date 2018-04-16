@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import { NgForm } from '@angular/forms';
 import { SetLocationPage } from '../set-location/set-location';
 import { Location } from '../../models/location.model';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Component({
   selector: 'page-add-place',
@@ -16,7 +17,8 @@ export class AddPlacePage {
   }
   locationIsSet = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,
-  private modalCtrl:ModalController ) {
+  private modalCtrl:ModalController,
+  private geolocation: Geolocation ) {
   }
 
  onSubmit(form:NgForm){
@@ -25,7 +27,19 @@ export class AddPlacePage {
  }
 
  onLocate(){
-
+  this.geolocation.getCurrentPosition().then((resp) => {
+    if(resp){
+      this.location.lat = resp.coords.latitude;
+      this.location.lng = resp.coords.longitude;
+      this.locationIsSet = true;
+      console.log('My Location', this.location);
+      this.onOpenMap();
+    }
+    // resp.coords.latitude
+    // resp.coords.longitude
+   }).catch((error) => {
+     console.log('Error getting location', error);
+   });
  }
 
  onOpenMap(){
