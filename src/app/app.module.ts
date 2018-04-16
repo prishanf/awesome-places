@@ -6,20 +6,33 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { PlacePage } from '../pages/place/place';
+import { AddPlacePage } from '../pages/add-place/add-place';
+import { SetLocationPage } from '../pages/set-location/set-location';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    PlacePage,
+    AddPlacePage,
+    SetLocationPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDN1exGhE2tqnQ2VV9a-xkXGHxAgwqiDTg'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    PlacePage,
+    AddPlacePage,
+    SetLocationPage
   ],
   providers: [
     StatusBar,

@@ -1,0 +1,71 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Add Place</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<form #f=ngForm (ngSubmit)="onSubmit(f)">
+    <ion-list>
+        <ion-item>
+          <ion-label fixed>Title</ion-label>
+          <ion-input placeholder="Beautiful Church.." type="text" ngModel name="title" required></ion-input>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label floating >Description</ion-label>
+          <ion-textarea type="text" ngModel name="description" required></ion-textarea>
+        </ion-item>
+      </ion-list>
+      <ion-row>
+        <ion-col>
+          <button type="button" block ion-button outline icon-left (click)="onLocate()">
+            <ion-icon name="locate"></ion-icon>
+            Locate Me</button>
+        </ion-col>
+        <ion-col>
+            <button type="button"  block ion-button outline icon-left (click)="onOpenMap()">
+              <ion-icon name="map"></ion-icon>
+              Select On Map</button>
+          </ion-col>   
+      </ion-row>
+     
+      <ion-row *ngIf="locationIsSet" >
+        <ion-col>
+          <p>Selected Place ..{{location.lat}} {{location.lng}}</p>
+            <agm-map [latitude]="location.lat" [longitude]="location.lng">
+              <agm-marker [latitude]="location.lat" [longitude]="location.lng"></agm-marker>
+            </agm-map>
+       
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col text-center>
+            <h4>Take a Photo</h4>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col text-center>
+            <button ion-button icon-left block outline type="button" (click)="onOpenCamera()">
+              <ion-icon name="camera"></ion-icon>
+              Open Camera
+            </button>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col text-center>
+            <img [src]="" alt="">
+          </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col text-center>
+            <button secodary ion-button block type="submit" [disabled]="!f.valid || !locationIsSet">
+             Add this place
+            </button>
+          </ion-col>
+      </ion-row>
+</form>
+</ion-content>

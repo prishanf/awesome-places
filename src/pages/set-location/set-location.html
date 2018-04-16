@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Set Locaiton</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <agm-map [latitude]="location.lat" [longitude]="location.lng" (mapClick)="onSetMarker($event)">
+          <agm-marker *ngIf="marker" [latitude]="marker.lat" [longitude]="marker.lng"></agm-marker>
+        </agm-map>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button [disabled]="!marker" ion-button block color="secondary" outline (click)="onClose()">Confirm</button>
+      </ion-col>
+      <ion-col>
+          <button ion-button block color="danger" outline (click)="onAbort()">Abort</button>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
