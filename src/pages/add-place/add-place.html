@@ -57,7 +57,7 @@
       </ion-row>
       <ion-row>
           <ion-col text-center>
-            <img [src]="" alt="">
+            <img [src]="domSanitizer.bypassSecurityTrustUrl(imageUrl)" alt="">
           </ion-col>
       </ion-row>
       <ion-row>

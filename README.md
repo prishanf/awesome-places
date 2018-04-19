@@ -31,3 +31,34 @@ Update the app.module.ts file with:
         Camera
     ]
   ```
+Run App on the IOS device
+  ionic cordova build ios
+  open IOS Project on Xcode
+  update the signing
+  ionic cordova run ios --device
+
+Image Display Settings
+.ts file
+```javascript 
+import { DomSanitizer } from '@angular/platform-browser';
+
+onOpenCamera(){
+    const options: CameraOptions = {
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        sourceType: this.camera.PictureSourceType.CAMERA,
+    }
+  
+    this.camera.getPicture(options).then((imageData) => {
+      this.imageUrl = 'data:image/jpeg;base64,' + imageData;
+      console.log(this.imageUrl);
+    }, (err) => {
+      console.log(err);
+    });
+  }
+```
+.html file 
+```html
+     <img [src]="domSanitizer.bypassSecurityTrustUrl(imageUrl)" alt="">
+```
+        
